@@ -8,7 +8,7 @@ from fastapi.openapi.utils import get_openapi
 from explicit_content_api.routers import http_nudenet
 app = FastAPI()
 DESCRIPTION = """
-A fast API implementation for wrapping upscale models.
+An API for classifying explicit images.
 """
 
 
@@ -24,7 +24,7 @@ def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema
     openapi_schema = get_openapi(
-        title="Upscale Wrapper",
+        title="Explicit Content Classifier",
         version="0.1",
         description=DESCRIPTION,
         routes=app.routes,
