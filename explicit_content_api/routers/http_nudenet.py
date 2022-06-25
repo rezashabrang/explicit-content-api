@@ -15,13 +15,11 @@ LOGGER = LoggerSetup(__name__, "info").get_minimal()
     response_model=dict,
     status_code=200
 )
-async def upscale_image(
+async def classify_image(
     image: UploadFile,
 ):
-    """ **Args**
-        * **model:**
-        Name of the model.
-        """
+    """Upload image.
+    """
     try:
         s_tot = time()
         # Preprocessing the image
