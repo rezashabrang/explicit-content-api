@@ -1,13 +1,13 @@
 name: build
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
-  build:
+  CI-Build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9"]
+        python-version: ["3.8","3.9","3.10"]
 
     steps:
     - uses: actions/checkout@v2
@@ -16,27 +16,41 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install poetry
-      run: make poetry-download
-
     - name: Set up cache
       uses: actions/cache@v2.1.6
       with:
         path: .venv
         key: venv-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ hashFiles('poetry.lock') }}
-    - name: Install dependencies
-      run: |
-        poetry config virtualenvs.in-project true
-        poetry install
 
-    - name: Run style checks
+    - name: Build Image
       run: |
-        make check-codestyle
+        docker-compose -f docker-compose-ci.yml up -d --build
+        sleep 20
 
-    - name: Run tests
+    - name: Lint
       run: |
-        make test
+        docker exec -i explicit-detector make lint
 
-    - name: Run safety checks
+    - name: Run Tests
       run: |
-        make check-safety
+        docker exec -i explicit-detector make test
+
+    - name: Check Coverage
+      run: |
+        docker exec -i explicit-detector make test
+
+    - name: Check Safety
+      run: |
+        docker exec -i explicit-detector make check-safety
+
+    - name: Check Complexity
+      run: |
+        docker exec -i explicit-detector make complexity
+
+    - name: Check Maintainability
+      run: |
+        docker exec -i explicit-detector make maintainability
+
+    - name: Check Docstrings
+      run: |
+        docker exec -i explicit-detector make interrogate

@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+    explicit-detector:
+        build:
+            dockerfile: Dockerfile.dev
+            context: .
+        image: explicit-detector
+        container_name: explicit-detector
+        networks:
+            - explicit-net
+        environment:
+            WEB_CONCURRENCY: 1
+            API_KEY: a
+            LOG_LEVEL: info
+        volumes:
+            - .:/app/
+            - /app/.venv
+        ports:
+            - "8000:80"
+
+networks:
+    explicit-net:
+        name: explicit-net

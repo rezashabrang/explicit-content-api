@@ -13,8 +13,7 @@ ENV LANG=C.UTF-8 \
     TZ=Asia/Tehran
 
 # install dependencies
-# build-essential python3-dev
-RUN apt update && apt upgrade -y && apt install curl python3-opencv -y
+RUN apt update && apt upgrade -y && apt install curl python3-opencv make -y
 
 # POETRY
 RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry python && \
@@ -24,11 +23,10 @@ RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry python
 # RUN poetry lock -n && poetry export --without-hashes > requirements.txt
 COPY pyproject.toml /app
 COPY poetry.lock /app
-RUN poetry install -n --no-dev
+RUN poetry install -n
 
 COPY . /app
 
 # Final
 WORKDIR /app
-CMD uvicorn explicit_content_api.main:app --host 0.0.0.0 --port 80 --log-level ${LOG_LEVEL}
-# --reload
+CMD uvicorn explicit_content_api.main:app --host 0.0.0.0 --port 80 --reload --log-level ${LOG_LEVEL}
