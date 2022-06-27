@@ -61,7 +61,7 @@ jobs:
       needs: CI-Build
       env:
         REGISTRY: ghcr.io
-        IMAGE_NAME: package-test
+        IMAGE_NAME: test
 
       permissions:
         contents: read
