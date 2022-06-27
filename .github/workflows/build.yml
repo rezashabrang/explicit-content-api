@@ -22,38 +22,38 @@ jobs:
         path: .venv
         key: venv-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ hashFiles('poetry.lock') }}
 
-    # - name: Build Image
-    #   run: |
-    #     docker-compose -f docker-compose-ci.yml up -d --build
-    #     sleep 20
+    - name: Build Image
+      run: |
+        docker-compose -f docker-compose-ci.yml up -d --build
+        sleep 20
 
-    # - name: Lint
-    #   run: |
-    #     docker exec -i explicit-detector make lint
+    - name: Lint
+      run: |
+        docker exec -i explicit-detector make lint
 
-    # - name: Run Tests
-    #   run: |
-    #     docker exec -i explicit-detector make test
+    - name: Run Tests
+      run: |
+        docker exec -i explicit-detector make test
 
-    # - name: Check Coverage
-    #   run: |
-    #     docker exec -i explicit-detector make test
+    - name: Check Coverage
+      run: |
+        docker exec -i explicit-detector make test
 
-    # - name: Check Safety
-    #   run: |
-    #     docker exec -i explicit-detector make check-safety
+    - name: Check Safety
+      run: |
+        docker exec -i explicit-detector make check-safety
 
-    # - name: Check Complexity
-    #   run: |
-    #     docker exec -i explicit-detector make complexity
+    - name: Check Complexity
+      run: |
+        docker exec -i explicit-detector make complexity
 
-    # - name: Check Maintainability
-    #   run: |
-    #     docker exec -i explicit-detector make maintainability
+    - name: Check Maintainability
+      run: |
+        docker exec -i explicit-detector make maintainability
 
-    # - name: Check Docstrings
-    #   run: |
-    #     docker exec -i explicit-detector make interrogate
+    - name: Check Docstrings
+      run: |
+        docker exec -i explicit-detector make interrogate
 
 
   build-and-push-image:
@@ -92,5 +92,5 @@ jobs:
         - name: Build and push
           run: |
             docker build -t rezashabrang/${{ env.IMAGE_NAME }} .
-            docker tag rezashabrang/${{ env.IMAGE_NAME }} ghcr.io/rezashabrang/${{ env.IMAGE_NAME }}:latest
-            docker push ghcr.io/rezashabrang/${{ env.IMAGE_NAME }}:latest
+            docker tag rezashabrang/${{ env.IMAGE_NAME }} ghcr.io/rezashabrang/${{ env.IMAGE_NAME }}:test
+            docker push ghcr.io/rezashabrang/${{ env.IMAGE_NAME }}:test
