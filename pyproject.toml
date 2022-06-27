@@ -39,7 +39,7 @@ python-multipart = "^0.0.5"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.1"
-black = {version = "^21.10b0", allow-prereleases = true}
+black = "^22.3.0"
 darglint = "^1.8.1"
 isort = {extras = ["colors"], version = "^5.10.1"}
 mypy = "^0.910"
@@ -133,6 +133,7 @@ addopts = [
   "--tb=short",
   "--doctest-modules",
   "--doctest-continue-on-failure",
+  "--disable-pytest-warnings"
 ]
 
 [tool.coverage.run]
@@ -145,7 +146,7 @@ source = "explicit-content-api"
 branch = true
 
 [tool.coverage.report]
-fail_under = 85
+fail_under = 80
 show_missing = true
 
 [tool.bandit]

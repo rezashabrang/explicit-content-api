@@ -1,30 +1,28 @@
 """Upscale endpoints"""
-from fastapi import APIRouter, HTTPException, UploadFile, Response
-from explicit_content_api.logger import LoggerSetup
-from explicit_content_api.lib.nudenet_model import classify_image
+from time import time
+
 import cv2
 import numpy as np
-from time import time
+from fastapi import APIRouter, HTTPException, Response, UploadFile
+
+from explicit_content_api.lib.nudenet_model import classify_image
+from explicit_content_api.logger import LoggerSetup
 
 # ------------------------------ Initialization -------------------------------
 router = APIRouter()
 LOGGER = LoggerSetup(__name__, "info").get_minimal()
 
-@router.post(
-    "/api/image-classifer/",
-    response_model=dict,
-    status_code=200
-)
-async def classify_image(
+
+@router.post("/api/image-classifer/", response_model=dict, status_code=200)
+async def classify_image_api(
     image: UploadFile,
 ):
-    """Upload image.
-    """
+    """Upload image."""
     try:
         s_tot = time()
         # Preprocessing the image
         contents = await image.read()
-        nparr = np.fromstring(contents, np.uint8)
+        nparr = np.frombuffer(contents, np.uint8)
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         # Classifier
         res = classify_image(image)
@@ -35,10 +33,7 @@ async def classify_image(
 
     except HTTPException as err:
         LOGGER.error(err)
-        raise HTTPException(
-            status_code=err.status_code,
-            detail=err.detail
-        ) from err
+        raise HTTPException(status_code=err.status_code, detail=err.detail) from err
 
     except Exception as err:
         LOGGER.error(err)

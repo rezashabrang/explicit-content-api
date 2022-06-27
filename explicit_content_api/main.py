@@ -5,7 +5,9 @@ import os
 
 from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.openapi.utils import get_openapi
+
 from explicit_content_api.routers import http_nudenet
+
 app = FastAPI()
 DESCRIPTION = """
 An API for classifying explicit images.

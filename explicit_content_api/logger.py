@@ -27,8 +27,7 @@ class LoggerSetup:
         handler = logging.StreamHandler()
 
         # Create formatters and add it to handlers
-        s_format = logging.Formatter(
-            "%(asctime)s - %(levelname)s - %(message)s")
+        s_format = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
         handler.setFormatter(s_format)
         handler.setLevel(LOGGER_LEVEL[self.level])
 
@@ -42,7 +41,8 @@ class LoggerSetup:
 
         # Create formatters and add it to handlers
         s_format = logging.Formatter(
-            "%(asctime)s - %(levelname)s - %(name)s - %(filename)s - %(lineno)d - %(message)s")
+            "%(asctime)s - %(levelname)s - %(name)s - %(filename)s - %(lineno)d - %(message)s"
+        )
         handler.setFormatter(s_format)
         handler.setLevel(LOGGER_LEVEL[self.level])
 
@@ -54,8 +54,7 @@ class LoggerSetup:
         f_handler = logging.FileHandler(file_path)
 
         # Create formatters and add it to handlers
-        f_format = logging.Formatter(
-            '%(asctime)s - %(levelname)s - %(message)s')
+        f_format = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
         f_handler.setFormatter(f_format)
         f_handler.setLevel(LOGGER_LEVEL[self.level])
 
@@ -66,4 +65,3 @@ class LoggerSetup:
         logger = logging.getLogger(name)
         logger.addHandler(handler)
         return logger
-

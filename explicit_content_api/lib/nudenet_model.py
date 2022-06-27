@@ -1,18 +1,21 @@
 """Using NudeNet model for classifying images"""
-import cv2
 from pathlib import Path
-from nudenet import NudeClassifierLite
-from explicit_content_api.lib.image_utils import load_images
+
+import cv2
 import numpy as np
+from nudenet import NudeClassifierLite
+
+from explicit_content_api.lib.image_utils import load_images
 
 
 class ModifiedLiteClassifier(NudeClassifierLite):
     """Modified LiteClassifer for loading image & Reading image"""
+
     def __init__(self):
         # Getting model path
         model_path = f"{Path(__file__).parent}/models/classifier_lite.onnx"
         self.lite_model = cv2.dnn.readNet(model_path)
-    
+
     def classify(self, image_path, size=(256, 256)):
         result = {}
         loaded_images, _ = load_images([image_path], size, image_names=[image_path])
@@ -28,8 +31,10 @@ class ModifiedLiteClassifier(NudeClassifierLite):
         return result
 
 
-def classify_image(image,): 
-    """"Classifying image"""
+def classify_image(
+    image,
+):
+    """ "Classifying image"""
     classifier = ModifiedLiteClassifier()
     res = classifier.classify(image)
     print(res)

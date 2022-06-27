@@ -40,8 +40,8 @@ formatting: codestyle
 #* Linting
 .PHONY: test
 test:
-	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=explicit_content_api tests/
-
+	PYTHONPATH=$(PYTHONPATH) poetry run pytest --cov-report=html --cov=explicit_content_api --no-cov -c pyproject.toml tests/
+	
 .PHONY: coverage
 coverage:
 	PYTHONPATH=$(PYTHONPATH) poetry run coverage report --rcfile pyproject.toml 
@@ -68,7 +68,7 @@ check-safety:
 	poetry run bandit -ll --recursive explicit_content_api tests
 	
 .PHONY: lint
-lint: test check-codestyle mypy check-safety
+lint: check-codestyle mypy
 
 .PHONY: update-dev-deps
 update-dev-deps:
