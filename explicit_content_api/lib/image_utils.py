@@ -1,3 +1,4 @@
+"""Utils for handling images."""
 import logging
 
 import cv2
@@ -42,12 +43,9 @@ def load_img(
     :return: A PIL Image instance.
     """
     if grayscale is True:
-        logging.warn("grayscale is deprecated. Please use " 'color_mode = "grayscale"')
         color_mode = "grayscale"
     if pil_image is None:
-        raise ImportError(
-            "Could not import PIL.Image. " "The use of `load_img` requires PIL."
-        )
+        raise ImportError("Could not import PIL.Image.")
 
     if isinstance(path, type("")):
         img = pil_image.open(path)
@@ -71,10 +69,9 @@ def load_img(
         if img.size != width_height_tuple:
             if interpolation not in _PIL_INTERPOLATION_METHODS:
                 raise ValueError(
-                    "Invalid interpolation method {} specified. Supported "
-                    "methods are {}".format(
-                        interpolation, ", ".join(_PIL_INTERPOLATION_METHODS.keys())
-                    )
+                    f"Invalid interpolation method {interpolation} specified. Supported "
+                    "methods are {', '.join(_PIL_INTERPOLATION_METHODS.keys())}",
+                    ", ".join(_PIL_INTERPOLATION_METHODS.keys()),
                 )
             resample = _PIL_INTERPOLATION_METHODS[interpolation]
             img = img.resize(width_height_tuple, resample)
@@ -94,7 +91,7 @@ def img_to_array(img, data_format="channels_last", dtype="float32"):
         ValueError: if invalid `img` or `data_format` is passed.
     """
     if data_format not in {"channels_first", "channels_last"}:
-        raise ValueError("Unknown data_format: %s" % data_format)
+        raise ValueError(f"Unknown data_format: {data_format}")
     # Numpy array x has format (height, width, channel)
     # or (channel, height, width)
     # but original PIL image has format (width, height, channel)
@@ -108,7 +105,7 @@ def img_to_array(img, data_format="channels_last", dtype="float32"):
         else:
             x = x.reshape((x.shape[0], x.shape[1], 1))
     else:
-        raise ValueError("Unsupported image shape: %s" % (x.shape,))
+        raise ValueError(f"Unsupported image shape: {(x.shape,)}")
     return x
 
 
@@ -135,6 +132,6 @@ def load_images(image_paths, image_size, image_names):
             loaded_images.append(image)
             loaded_image_paths.append(image_names[i])
         except Exception as ex:
-            logging.exception(f"Error reading {img_path} {ex}", exc_info=True)
+            logging.exception("Error reading %s %s", img_path, ex, exc_info=True)
 
     return np.asarray(loaded_images), loaded_image_paths

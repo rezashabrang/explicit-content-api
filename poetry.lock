@@ -30,7 +30,7 @@ trio = ["trio (>=0.16)"]
 name = "astroid"
 version = "2.11.6"
 description = "An abstract syntax tree for Python with inference support."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6.2"
 
@@ -185,7 +185,7 @@ python-versions = ">=3.6,<4.0"
 name = "dill"
 version = "0.3.5.1"
 description = "serialize all of python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, !=3.6.*"
 
@@ -385,7 +385,7 @@ tests = ["pytest", "pytest-cov", "pytest-mock"]
 name = "isort"
 version = "5.10.1"
 description = "A Python utility / library to sort Python imports."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6.1,<4.0"
 
@@ -416,7 +416,7 @@ i18n = ["Babel (>=2.7)"]
 name = "lazy-object-proxy"
 version = "1.7.1"
 description = "A fast and thorough lazy object proxy."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -446,7 +446,7 @@ python-versions = ">=3.7"
 name = "mccabe"
 version = "0.7.0"
 description = "McCabe checker, plugin for flake8"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -593,7 +593,7 @@ tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "pa
 name = "platformdirs"
 version = "2.5.2"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -721,7 +721,7 @@ toml = ["toml"]
 name = "pylint"
 version = "2.14.3"
 description = "python code static checker"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7.2"
 
@@ -1058,7 +1058,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 name = "tomli"
 version = "1.2.3"
 description = "A lil' TOML parser"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -1066,7 +1066,7 @@ python-versions = ">=3.6"
 name = "tomlkit"
 version = "0.11.0"
 description = "Style preserving TOML library"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6,<4.0"
 
@@ -1167,14 +1167,14 @@ python-versions = ">=3.7"
 name = "wrapt"
 version = "1.14.1"
 description = "Module for decorators, wrappers and monkey patching."
-category = "dev"
+category = "main"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "2fab8b475ec5c18ba75bf76dd55da048937d6d4fb08e7a770b359b5ca83c0513"
+content-hash = "94b3a0a63be711b2c5354cb46594f6f5641f88e1b477e287ca40caa3bf09379a"
 
 [metadata.files]
 anybadge = [

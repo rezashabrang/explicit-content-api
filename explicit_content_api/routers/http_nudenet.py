@@ -1,9 +1,11 @@
 """Upscale endpoints"""
+from typing import Dict
+
 from time import time
 
 import cv2
 import numpy as np
-from fastapi import APIRouter, HTTPException, Response, UploadFile
+from fastapi import APIRouter, HTTPException, UploadFile
 
 from explicit_content_api.lib.nudenet_model import classify_image
 from explicit_content_api.logger import LoggerSetup
@@ -16,7 +18,7 @@ LOGGER = LoggerSetup(__name__, "info").get_minimal()
 @router.post("/api/image-classifer/", response_model=dict, status_code=200)
 async def classify_image_api(
     image: UploadFile,
-):
+) -> Dict[str, float]:
     """Upload image."""
     try:
         s_tot = time()

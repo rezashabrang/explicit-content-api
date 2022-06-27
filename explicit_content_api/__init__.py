@@ -1,6 +1,4 @@
-# type: ignore[attr-defined]
 """API for classifying explicit images"""
-
 import sys
 
 if sys.version_info >= (3, 8):
@@ -10,6 +8,7 @@ else:
 
 
 def get_version() -> str:
+    """Version"""
     try:
         return importlib_metadata.version(__name__)
     except importlib_metadata.PackageNotFoundError:  # pragma: no cover

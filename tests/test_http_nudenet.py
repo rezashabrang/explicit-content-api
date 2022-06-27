@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Any, Callable, List
 
 import os
 from itertools import tee
@@ -12,7 +12,7 @@ from explicit_content_api.routers.http_nudenet import router
 client = TestClient(router)
 
 
-def test_simple_router(load_test_images: Callable):
+def test_simple_router(load_test_images: List[Any]) -> None:
     """Simple router test"""
     sample_image = load_test_images[0]
     response = client.post("/api/image-classifer/", files=sample_image)

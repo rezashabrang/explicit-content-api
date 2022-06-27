@@ -17,7 +17,7 @@ logging.root.setLevel(LOGGER_LEVEL[os.getenv("LOG_LEVEL")])
 class LoggerSetup:
     """Class serving several loggers"""
 
-    def __init__(self, name, level="debug") -> None:
+    def __init__(self, name: str, level: str = "debug") -> None:
         self.level = level
         self.name = name
 

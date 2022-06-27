@@ -66,9 +66,13 @@ check-safety:
 	poetry check
 	poetry run safety check --full-report
 	poetry run bandit -ll --recursive explicit_content_api tests
+
+.PHONY: pylint
+pylint:
+	poetry run pylint --rcfile pyproject.toml explicit_content_api
 	
 .PHONY: lint
-lint: check-codestyle mypy
+lint: check-codestyle mypy pylint
 
 .PHONY: update-dev-deps
 update-dev-deps:
