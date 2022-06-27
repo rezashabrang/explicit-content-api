@@ -60,9 +60,9 @@ jobs:
       runs-on: ubuntu-latest
       needs: CI-Build
       env:
-        REGISTRY: Hello
+        REGISTRY: ghcr.io
         IMAGE_NAME: package-test
-        
+
       permissions:
         contents: read
         packages: write
