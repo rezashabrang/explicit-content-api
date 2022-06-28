@@ -92,6 +92,6 @@ jobs:
 
         - name: Build and push
           run: |
-            docker build -t rezashabrang/${{ env.IMAGE_NAME }} .
+            docker build -t rezashabrang/${{ env.IMAGE_NAME }} --target production .
             docker tag rezashabrang/${{ env.IMAGE_NAME }} ghcr.io/rezashabrang/${{ env.IMAGE_NAME }}:${GITHUB_REF##*/}
             docker push ghcr.io/rezashabrang/${{ env.IMAGE_NAME }}:${GITHUB_REF##*/}

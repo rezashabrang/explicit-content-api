@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+    test-explicit-detector-prod:
+        build:
+            dockerfile: Dockerfile
+            target: production
+            context: .
+        image: test-explicit-detector-prod
+        container_name: test-explicit-detector-prod
+        networks:
+            - explicit-net-prod
+        environment:
+            WEB_CONCURRENCY: ${WEB_CONCURRENCY}
+            API_KEY: ${API_KEY}
+            LOG_LEVEL: error
+        volumes:
+            - .:/app/
+            - /app/.venv
+        ports:
+            - "8001:80"
+
+networks:
+    explicit-net-prod:
+        name: explicit-net-prod
